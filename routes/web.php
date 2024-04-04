@@ -18,7 +18,7 @@ use Inertia\Inertia;
 //     return view('welcome');
 // });
 
-Route::get('/coba', function () {
+Route::get('coba', function () {
     return Inertia::render('Index', [
         'name' => "Gema"
     ]);

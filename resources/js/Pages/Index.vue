@@ -1,5 +1,7 @@
-<script>
-export default {};
-</script>
+<template>Test! {{ name }}</template>
 
-<template>Test!</template>
+<script>
+export default {
+    props: ["name"],
+};
+</script>

@@ -1,12 +1,12 @@
 // @ts-nocheck
 <template>
-    <Head title="New Product" />
+    <Head title="Edit product" />
     <AppLayout>
         <div class="bg-white border-4 rounded-lg shadow relative m-10">
             <div
                 class="flex items-start justify-between p-5 border-b rounded-t"
             >
-                <h3 class="text-xl font-semibold">Add new Product</h3>
+                <h3 class="text-xl font-semibold">Edit product</h3>
                 <button
                     type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
@@ -15,7 +15,12 @@
             </div>
 
             <div class="p-6 space-y-6">
-                <form @submit.prevent="form.post(route('store_product'))">
+                <form
+                    @submit.prevent="
+                        form.patch(route('update_product', product.id))
+                    "
+                >
+                    <input type="hidden" name="oldImage" :value="form.image" />
                     <div class="grid grid-cols-1 mb-5">
                         <div class="col-span-6 sm:col-span-3">
                             <label
@@ -43,7 +48,7 @@
                                 >Stock</label
                             >
                             <input
-                                type="text"
+                                type="number"
                                 id="stock"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                 placeholder="Stock"
@@ -106,6 +111,11 @@
                                     {{ errors.image }}
                                 </div>
                             </div>
+                            <img
+                                :src="`storage/${form.image}`"
+                                :alt="form.name"
+                                class="mt-4 mx-auto max-h-40"
+                            />
                             <progress
                                 v-if="form.progress"
                                 :value="form.progress.percentage"
@@ -120,10 +130,15 @@
                     >
                         <button
                             type="submit"
-                            class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 focus:ring-cyan-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2"
                         >
-                            Add product
+                            Edit product
                         </button>
+                        <Link
+                            :href="route('index_product')"
+                            class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                            >Cancel</Link
+                        >
                     </div>
                 </form>
             </div>
@@ -132,12 +147,13 @@
 </template>
 
 <script>
-import { Head, useForm } from "@inertiajs/vue3";
+import { Head, Link, useForm } from "@inertiajs/vue3";
 import AppLayout from "../../Layouts/App.vue";
 
 export default {
     components: {
         Head,
+        Link,
         AppLayout,
     },
     props: {
@@ -145,7 +161,7 @@ export default {
         errors: Object,
     },
     setup(props) {
-        const formData = useForm({
+        const form = useForm({
             id: props.product.id,
             name: props.product.name,
             description: props.product.description,
@@ -155,7 +171,7 @@ export default {
         });
 
         return {
-            formData,
+            form,
         };
     },
 };

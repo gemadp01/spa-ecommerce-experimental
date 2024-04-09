@@ -13,12 +13,12 @@
                         class="relative w-full md:w-48 flex justify-center items-center"
                     >
                         <img
-                            :src="`storage/${product.image}`"
+                            :src="`storage/products/${product.image}`"
                             :alt="product.name"
                             class="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none"
                         />
                     </div>
-                    <form class="flex-auto p-6">
+                    <div class="flex-auto p-6">
                         <div class="flex flex-wrap">
                             <h1 class="flex-auto text-xl font-semibold">
                                 {{ product.name }}
@@ -33,21 +33,21 @@
                             </div>
                         </div>
                         <div class="flex gap-2 mt-2 text-sm font-medium">
-                            <button
-                                type="button"
+                            <Link
+                                :href="route('show_product', product.id)"
                                 class="py-2 px-4 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                             >
                                 Detail
-                            </button>
-                            <button
-                                type="button"
-                                @click="destroy(product.id)"
+                            </Link>
+                            <Link
+                                :href="route('delete_product', product)"
+                                method="DELETE"
                                 class="py-2 px-4 bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                             >
                                 Delete
-                            </button>
+                            </Link>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
 
@@ -66,27 +66,27 @@
 import { Head, Link } from "@inertiajs/vue3";
 import AppLayout from "../../Layouts/App.vue";
 // import ProductCard from "../../components/ProductCard.vue";
-import { Inertia } from "@inertiajs/inertia";
+// import { Inertia } from "@inertiajs/inertia";
 
 export default {
     components: {
+        AppLayout,
         Head,
         Link,
         // ProductCard,
-        AppLayout,
     },
     props: {
         products: Object,
     },
-    setup() {
-        const destroy = (id) => {
-            if (confirm("Are you sure?")) {
-                Inertia.delete(route("delete_product", id));
-            }
-        };
-        return {
-            destroy,
-        };
-    },
+    // setup() {
+    //     const destroy = (id) => {
+    //         if (confirm("Are you sure?")) {
+    //             Inertia.get(route("delete_product", id));
+    //         }
+    //     };
+    //     return {
+    //         destroy,
+    //     };
+    // },
 };
 </script>

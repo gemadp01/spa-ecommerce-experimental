@@ -75,7 +75,7 @@
                             >
                                 {{ showAlert() }}
                             </div>
-                            <!-- <button @click="showAlert">Hello world</button> -->
+                            <!-- <button @click="showAlert()">Hello world</button> -->
                             <slot />
                         </div>
                     </div>
@@ -93,17 +93,13 @@ export default {
         Link,
     },
     methods: {
-        showAlert() {
+        showAlert: function () {
             const Toast = this.$swal.mixin({
                 toast: true,
                 position: "top-end",
                 showConfirmButton: false,
-                timer: 10000,
+                timer: 4000,
                 timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                },
             });
             Toast.fire({
                 icon: "success",

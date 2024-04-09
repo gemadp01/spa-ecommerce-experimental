@@ -28,6 +28,7 @@
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                 placeholder="Product name"
                                 v-model="form.name"
+                                autofocus
                             />
                             <div v-if="errors.name" class="text-red-600">
                                 {{ errors.name }}
@@ -42,7 +43,7 @@
                                 >Stock</label
                             >
                             <input
-                                type="text"
+                                type="number"
                                 id="stock"
                                 class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-cyan-600 focus:border-cyan-600 block w-full p-2.5"
                                 placeholder="Stock"
@@ -122,7 +123,6 @@
                         </button>
                     </div>
                 </form>
-
             </div>
         </div>
     </AppLayout>

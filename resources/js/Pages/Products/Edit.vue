@@ -112,7 +112,7 @@
                                 </div>
                             </div>
                             <img
-                                :src="`storage/${form.image}`"
+                                :src="`/storage/products/${product.image}`"
                                 :alt="form.name"
                                 class="mt-4 mx-auto max-h-40"
                             />
